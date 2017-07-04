@@ -26,6 +26,7 @@ public class NumbersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Set activity_category.xml as the activity contentview.
+        //activity_category serves as a container which will be replaced by gthe fragment layout.
         setContentView(R.layout.activity_category);
         //Present numberfragment which has the word_list xml layout.
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new NumbersFragment()).commit();
