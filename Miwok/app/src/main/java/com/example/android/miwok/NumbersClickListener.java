@@ -15,7 +15,7 @@ public class NumbersClickListener implements View.OnClickListener {
         //getResourceEntryName return id name in string
 
         //Determine the view that triggers the event
-        switch (view.getId()){
+        /*switch (view.getId()){
             case R.id.numbers:
                 Toast.makeText(view.getContext(),"Open the list of "+ view.getResources().getResourceEntryName(view.getId()),Toast.LENGTH_SHORT).show();
                 break;
@@ -24,7 +24,7 @@ public class NumbersClickListener implements View.OnClickListener {
                 break;
             default:
                 break;
-        }
+        }*/
 
     }
 }

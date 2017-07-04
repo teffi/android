@@ -44,6 +44,4 @@ public class NumbersActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }
