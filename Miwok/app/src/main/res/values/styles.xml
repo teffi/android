@@ -17,7 +17,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/primary_color</item>
+        <item name ="actionBarStyle">@style/MiwokAppBarStyle</item>
         <item name="colorPrimaryDark">@color/primary_dark_color</item>
+        <!-- Removes action bar dropshadow. IMPT: Must be partnered with elevation=0 in actionBarStyle - Android 5.0 Change-->
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <!-- Style for a category of vocabulary words -->
@@ -30,4 +33,47 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>
+
+    <!-- App bar style -->
+    <style name="MiwokAppBarStyle" parent="style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <!--Remove the sahdow below the app bar
+        IMPT: Must also set android:windowContentOverlay on App theme.
+        https://stackoverflow.com/a/12246593/1045672
+        -->
+        <item name="elevation">0dp</item>
+    </style>
+
+
+    <style name="CategoryTab" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@android:color/white</item>
+        <item name="tabSelectedTextColor">@android:color/white</item>
+        <item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
+
+    </style>
+    <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#A8A19E</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <!-- TAB STYLE  TEMPLATE
+
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+    <item name="tabMaxWidth">@dimen/tab_max_width</item>
+    <item name="tabIndicatorColor">?attr/colorAccent</item>
+    <item name="tabIndicatorHeight">2dp</item>
+    <item name="tabPaddingStart">12dp</item>
+    <item name="tabPaddingEnd">12dp</item>
+    <item name="tabBackground">?attr/selectableItemBackground</item>
+    <item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
+    <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+
+    </style>
+    <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="textAllCaps">true</item>
+    </style>
+-->
+
 </resources>
