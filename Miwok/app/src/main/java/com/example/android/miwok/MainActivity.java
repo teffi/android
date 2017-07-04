@@ -24,7 +24,22 @@ import android.view.View;
 import android.widget.TextView;
 
 
+
 public class MainActivity extends AppCompatActivity {
+
+    public static int[] imageResId = {
+            R.drawable.number_one,
+            R.drawable.family_mother,
+            R.drawable.color_red,
+            R.drawable.family_father
+    };
+
+    public static int[] tabTitles= {
+            R.string.category_numbers,
+            R.string.category_family,
+            R.string.category_colors,
+            R.string.category_phrases
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +62,15 @@ public class MainActivity extends AppCompatActivity {
         // 3. Set the tab layout's tab names with the view pager's adapter's titles by calling onPageTitle()
 
         tabLayout.setupWithViewPager(viewPager);
+
+        //Add Icons to TabLayout
+        //Inside your FragmentPagerAdapter, you can delete the getPageTitle() line or simply return null:
+        //use the getTabAt() function to set the icon:
+        for (int i = 0; i< imageResId.length; i++){
+            tabLayout.getTabAt(i).setIcon(imageResId[i]);
+        }
+        //Check CategoryPageAdapter for icon+text
+
 
 
         /*
