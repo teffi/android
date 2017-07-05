@@ -16,7 +16,10 @@
 package com.example.android.quakereport;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.LoaderManager;
@@ -59,10 +62,25 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
         progressBar = (ProgressBar)findViewById(R.id.progress_indicator);
 
-        //1- id of loader,null -bundle, this - class with LoaderCallBacks
-        getLoaderManager().initLoader(1,null,this);
+        if(hasNetworkConnectivity()) {
+            //1- id of loader,null -bundle, this - class with LoaderCallBacks
+            getLoaderManager().initLoader(1, null, this);
+        }
     }
 
+    private Boolean hasNetworkConnectivity(){
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        //networkInfo is null if no network connection is available.
+        if(networkInfo == null || networkInfo.isFailover()){
+            progressBar.setVisibility(View.GONE);
+            emptyTextView.setText("No Internet Connection");
+            return false;
+        }else{
+            Log.v(LOG_TAG,"NETWORK INFO NULL");
+        }
+        return true;
+    }
     private void updateUI(List<EarthQuake> quakes){
         EarthQuakeAdapter quakeAdapter = new EarthQuakeAdapter(this,quakes);
 
