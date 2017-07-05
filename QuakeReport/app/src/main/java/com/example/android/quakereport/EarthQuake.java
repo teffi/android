@@ -3,6 +3,8 @@ package com.example.android.quakereport;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import java.net.URL;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,22 +14,35 @@ import java.util.Date;
  */
 
 public class EarthQuake {
-    String mMagnitude;
+    Double mMagnitude;
     long mDateInMilliseconds;
     String mLocation;
+    String mURL;
+
     Date mDate;
 
-    public EarthQuake(String location, long date, String magnitude){
+    public EarthQuake(String location, long date, Double magnitude, String url){
         mMagnitude = magnitude;
         mLocation = location;
         mDateInMilliseconds = date;
+        mURL = url;
     }
 
-    public static EarthQuake create(String location, long date, String magnitude){
-        return new EarthQuake(location,date,magnitude);
+    public static EarthQuake create(String location, long date, Double magnitude,String url){
+        return new EarthQuake(location,date,magnitude,url);
     }
 
     public String getMagnitude(){
+        DecimalFormat formatter = new DecimalFormat("0.0");
+
+        return formatter.format(mMagnitude);
+    }
+
+    public String getURL(){
+        return mURL;
+    }
+
+    public Double getMagnitudeInDouble(){
         return mMagnitude;
     }
 

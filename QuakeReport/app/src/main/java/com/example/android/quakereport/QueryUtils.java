@@ -5,6 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,9 +66,7 @@ public final class QueryUtils {
                 //features.getJSONObject(i) - gets the object on index i.
 
                 JSONObject properties = features.getJSONObject(i).getJSONObject("properties");
-
-
-                EarthQuake quake = EarthQuake.create(properties.getString("place"),properties.getLong("time"),properties.getString("mag"));
+                EarthQuake quake = EarthQuake.create(properties.getString("place"),properties.getLong("time"),properties.getDouble("mag"),properties.getString("url"));
                 earthquakes.add(quake);
                 //4 is for log's indention
                 Log.v("QueryUtils", properties.toString(4));
