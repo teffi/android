@@ -30,7 +30,11 @@ public class EarthQuakeLoader extends AsyncTaskLoader<List<EarthQuake>> {
     @Override
     protected void onStartLoading() {
         Log.v(LOG_TAG,"Loader start");
-        forceLoad();
+        //forceLoad();
+    }
+
+    public void setRequestURL(String url){
+        mRequestURL = url;
     }
 
 }

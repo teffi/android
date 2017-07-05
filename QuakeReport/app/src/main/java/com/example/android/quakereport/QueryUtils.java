@@ -62,8 +62,6 @@ public final class QueryUtils {
             // TODO: Parse the response given by the SAMPLE_JSON_RESPONSE string and
             // build up a list of Earthquake objects with the corresponding data.
 
-
-
             JSONObject rootObj = new JSONObject(jsonData);
             JSONArray features = rootObj.getJSONArray("features");
 
@@ -142,7 +140,7 @@ public final class QueryUtils {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
 
-            Log.v("Earthquake", "Makes HTTP Request");
+            Log.v("Earthquake", "Makes HTTP Request with url "+url.toString());
         } catch (IOException e) {
             Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
         } finally {
