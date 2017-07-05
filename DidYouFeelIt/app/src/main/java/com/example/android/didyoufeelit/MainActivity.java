@@ -15,9 +15,14 @@
  */
 package com.example.android.didyoufeelit;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
+
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * Displays the perceived strength of a single earthquake event based on responses from people who
@@ -34,11 +39,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Perform the HTTP request for earthquake data and process the response.
-        Event earthquake = Utils.fetchEarthquakeData(USGS_REQUEST_URL);
-
-        // Update the information displayed to the user.
-        updateUi(earthquake);
+        EarthQuakeAsyncTask asyncTask = new EarthQuakeAsyncTask();
+        asyncTask.execute(USGS_REQUEST_URL);
     }
 
     /**
@@ -54,4 +56,33 @@ public class MainActivity extends AppCompatActivity {
         TextView magnitudeTextView = (TextView) findViewById(R.id.perceived_magnitude);
         magnitudeTextView.setText(earthquake.perceivedStrength);
     }
+
+    private class EarthQuakeAsyncTask extends AsyncTask<String,Void,Event> {
+        @Override
+        protected Event doInBackground(String... params) {
+            // Don't perform the request if there are no URLs, or the first URL is null.
+            if(params.length < 1 || params[0] == null){
+                return null;
+            }
+            // Perform the HTTP request for earthquake data and process the response.
+            Event earthquake = Utils.fetchEarthquakeData(params[0]);
+            return earthquake;
+        }
+
+
+        protected void onPostExecute(Event event) {
+
+            if(event == null){
+                return;
+            }
+
+            super.onPostExecute(event);
+            // Update the information displayed to the user.
+            updateUi(event);
+        }
+
+
+    }
 }
+
+

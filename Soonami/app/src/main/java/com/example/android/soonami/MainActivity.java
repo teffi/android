@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
      * {@link AsyncTask} to perform the network request on a background thread, and then
      * update the UI with the first earthquake in the response.
      */
+    //PARAMS, PROGRESS, RESULT - GENERIC PARAMETER
     private class TsunamiAsyncTask extends AsyncTask<URL, Void, Event> {
 
         @Override

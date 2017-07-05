@@ -17,6 +17,7 @@ package com.example.android.quakereport;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -25,23 +26,29 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EarthquakeActivity extends AppCompatActivity {
 
+    private static final String USGS_REQUEST_URL =
+            "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=5&limit=10";
+    
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
+    ListView earthquakeListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
 
-        //Extract earth quakes arraylist from QueryUtils which parses json.
-        ArrayList<EarthQuake>quakes = QueryUtils.extractEarthquakes();
-
-
         // Find a reference to the {@link ListView} in the layout
-        ListView earthquakeListView = (ListView) findViewById(R.id.list);
+        earthquakeListView = (ListView) findViewById(R.id.list);
 
+        EarthQuakeAsync task = new EarthQuakeAsync();
+        task.execute(USGS_REQUEST_URL);
+    }
+
+    private void updateUI(List<EarthQuake> quakes){
         EarthQuakeAdapter quakeAdapter = new EarthQuakeAdapter(this,quakes);
 
         // Set the adapter on the {@link ListView}
@@ -60,7 +67,20 @@ public class EarthquakeActivity extends AppCompatActivity {
                 startActivity(browserIntent);
             }
         });
+    }
+    private class EarthQuakeAsync extends AsyncTask<String,Void,List<EarthQuake>>{
+        @Override
+        protected List<EarthQuake> doInBackground(String... params) {
 
+            List<EarthQuake> quakes = QueryUtils.fetchEarthquakeData(params[0]);
+            return quakes;
+        }
 
+        @Override
+        protected void onPostExecute(List<EarthQuake> earthQuakes) {
+            //super.onPostExecute(earthQuakes);
+            updateUI(earthQuakes);
+
+        }
     }
 }

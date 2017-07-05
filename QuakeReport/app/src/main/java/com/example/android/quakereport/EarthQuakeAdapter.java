@@ -20,6 +20,7 @@ import org.w3c.dom.Text;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by steffitan on 04/07/2017.
@@ -29,10 +30,9 @@ public class EarthQuakeAdapter extends ArrayAdapter<EarthQuake> {
 
     private static final String LOCATION_SEPARATOR = " of ";
 
-    public EarthQuakeAdapter(Context context, @NonNull ArrayList<EarthQuake> objects){
+    public EarthQuakeAdapter(Context context, @NonNull List<EarthQuake> objects){
         super(context,R.layout.quake_list_item,objects);
     }
-
 
 
     @Override
