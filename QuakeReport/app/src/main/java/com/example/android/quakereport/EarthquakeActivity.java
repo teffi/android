@@ -27,6 +27,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -42,6 +43,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
     TextView emptyTextView;
     ListView earthquakeListView;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
         //Set listview empty view.
         earthquakeListView.setEmptyView(emptyTextView);
+
+        progressBar = (ProgressBar)findViewById(R.id.progress_indicator);
 
         //1- id of loader,null -bundle, this - class with LoaderCallBacks
         getLoaderManager().initLoader(1,null,this);
@@ -95,6 +99,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
     public void onLoadFinished(Loader<List<EarthQuake>> loader, List<EarthQuake> data) {
         Log.v(LOG_TAG,"Loader finished");
         emptyTextView.setText("No earthquakes found");
+        progressBar.setVisibility(View.GONE);
         if(data != null || !data.isEmpty()){
             updateUI(data);
         }
