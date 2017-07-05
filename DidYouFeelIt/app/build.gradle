@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.example.android.soonami"
+        applicationId "com.example.android.didyoufeelit"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
